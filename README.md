@@ -1,2 +1,2 @@
 # Mensajeria Stark
-Main project, for Cinema Service
+Main project, for messenger services.
