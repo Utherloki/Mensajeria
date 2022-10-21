@@ -28,7 +28,7 @@ def activate():
             db = get_db()               ## Codigo(OK)
             
             attempt = db.execute(
-                'SELECT * FROM activationlink where challenge=? and state=? ' , (number, utils.U_UNCONFIRMED)   ## Codigo(OK)
+                'SELECT * FROM activationlink where challenge=? and state=? and CURRENT_TIMESTAMP BETWEEN created AND validuntil ' , (number, utils.U_UNCONFIRMED)   ## Codigo(OK)
             ).fetchone()
 
             if attempt is not None:
