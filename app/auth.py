@@ -197,9 +197,9 @@ def change():
             if attempt is not None:
                 return render_template('auth/change.html', number=number)
         
-        return render_template('auth/change.html')
+        return render_template('auth/forgot.html')
     except:
-        return render_template('auth/change.html')      ## Codigo(OK)
+        return render_template('auth/forgot.html')      ## Codigo(OK)
 
 
 @bp.route('/forgot', methods=('GET', 'POST'))
@@ -262,12 +262,12 @@ def login():
             username = request.form['username']
             password = request.form['password']
 
-            if username is None:        ## Codigo(OK)
+            if not username:        ## Codigo(OK)
                 error = 'Username Field Required'
                 flash(error)
                 return render_template('auth/login.html')
 
-            if password is None:        ## Codigo(OKJ)
+            if not password:        ## Codigo(OKJ)
                 error = 'Password Field Required'
                 flash(error)
                 return render_template('auth/login.html')
