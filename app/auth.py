@@ -162,12 +162,12 @@ def confirm():
 
             if attempt is not None:
                 db.execute(
-                    'UPDATE activationlink SET state = ? WHERE id = ?', (utils.F_INACTIVE, attempt['id'])     ## Codigo(VERIFICAR QUERY ?)
+                    'UPDATE forgotlink SET state = ? WHERE id = ?', (utils.F_INACTIVE, attempt['id'])     ## Codigo(VERIFICAR QUERY ?)
                 )
                 salt = hex(random.getrandbits(128))[2:]
                 hashP = generate_password_hash(password + salt)   
                 db.execute(
-                    'INSERT INTO activationlink (password, salt, id) VALUES (?,?,?)', (hashP, salt, attempt['userid'])    ## Codigo(VERIFICAR QUERY ?)
+                    'UPDATE user SET password =?, salt=? WHERE id=? ', (hashP, salt, attempt['userid'])    ## Codigo(VERIFICAR QUERY ?)
                 )
                 db.commit()
                 return redirect(url_for('auth.login'))
